@@ -136,6 +136,26 @@ Cela permet de chaîner les tables entre elles.
 Un système de gestion de base de données (SGBD) est le logiciel qui permet à un ordinateur de stocker, récupérer, ajouter, supprimer et modifier des données. Un SGBD gère tous les aspects primaires d'une base de données, y compris la gestion de la manipulation des données, comme l'authentification des utilisateurs, ainsi que l'insertion ou l'extraction des données. Un SGBD définit ce qu'on appelle le schéma de données ou la structure dans laquelle les données sont stockées.
 Chaque SGBD possède ses propres spécificités et caractéristiques. Pour présenter ces différences, les logiciels de gestion de bases de données sont cités, tels que : MySQL, PostgreSQL, SQLite, Microsoft SQL Server ou encore Oracle.
 
+## CRUD
+
+Google Slide:
+
+![diapo1](Slide%20CRUD/slide1.png)
+![diapo2](Slide%20CRUD/slide2.png)
+![diapo3](Slide%20CRUD/slide3.png)
+![diapo4](Slide%20CRUD/slide4.png)
+![diapo5](Slide%20CRUD/slide5.png)
+![diapo6](Slide%20CRUD/slide6.png)
+![diapo7](Slide%20CRUD/slide7.png)
+![diapo8](Slide%20CRUD/slide8.png)
+![diapo9](Slide%20CRUD/slide9.png)
+![diapo10](Slide%20CRUD/slide10.png)
+![diapo11](Slide%20CRUD/slide11.png)
+![diapo12](Slide%20CRUD/12.png)
+![diapo13](Slide%20CRUD/slide13.png)
+![diapo14](Slide%20CRUD/slide14.png)
+![diapo15](Slide%20CRUD/slide15.png)
+
 ## Exercices:
 
 - https://www.programiz.com/sql/online-compiler/
