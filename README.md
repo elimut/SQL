@@ -311,5 +311,14 @@ Google Slide:
                 FROM note
             );
     ->Calculer la moyenne pondérée par matière de chaque classe. Afficher le nom des classe ainsi que leur moyenne en triant de la plus élevée à la plus basse.
+- mySQL:
+    ->Afficher tous les jeux qui ont un prix inférieur à 10,
+    Afficher le prix minimum et maximum des jeux et donner leurs noms:
 
-        
+        SELECT nom FROM jeux_video WHERE prix < 10;
+        SELECT nom, prix 
+        FROM jeux_video 
+        WHERE prix = (SELECT MIN(prix) FROM jeux_video) 
+        or prix = (SELECT MAX(prix) FROM jeux_video)
+        ORDER BY prix;
+
