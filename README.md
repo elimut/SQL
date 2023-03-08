@@ -114,6 +114,8 @@ Pour joindre les tables, il faut les joindre sur quelque chose.
     FROM table_1
     INNER JOIN table_2 ON table_1.une_colonne = table_2.autre_colonne;
 
+**Attention : il est important de noter que si un utilisateur à été supprimé, alors on ne verra pas ses commandes dans la liste puisque INNER JOIN retourne uniquement les résultats ou la condition est vrai dans les 2 tables.**
+
 ### Comment retrouver les données?
 
 Exemple:
@@ -159,7 +161,7 @@ Google Slide:
 ## Exercices:
 
 - https://www.programiz.com/sql/online-compiler/
-- https://www.w3schools.com/sql/exercise.asp:
+- https://www.w3schools.com/sql/exercise.asp
     ->Afficher tous les prénoms:
 
         SELECT first_name FROM customers;
@@ -220,6 +222,94 @@ Google Slide:
         FROM eleve
         LEFT JOIN classe ON eleve.cla_id = classe.cla_id;
         >Dans le langage SQL, la commande LEFT JOIN (aussi appelée LEFT OUTER JOIN) est un type de jointure entre 2 tables. Cela permet de lister tous les résultats de la table de gauche (left = gauche) même s’il n’y a pas de correspondance dans la deuxième tables.
-    ->
+    ->Lister les noms, prénoms des élèves ansi que leur note et le nom de la matière concernée. Trier les résultats par note décroissante.
 
+        SELECT ele_nom AS "Nom", ele_prenom AS "Prénom", not_note AS "note", mat_nom AS "matière concernée"
+        FROM eleve 
+        INNER JOIN note ON eleve.ele_id = note.ele_id
+        INNER JOIN matiere ON note.mat_id = matiere.mat_id
+        ORDER BY "note" DESC;
+    ->Calculer la moyenne par matiere, tous élèves confondus. Afficher le nom de la matiere ainsi que la moyenne. Trier les résultats de la moyenne la plus élevée à la plus basse.
 
+        SELECT mat_nom AS "Matière",
+        AVG(not_note) AS "Moyenne"
+        FROM note
+        INNER JOIN matiere ON note.mat_id = matiere.mat_id
+        GROUP BY mat_nom
+        ORDER BY "Moyenne" DESC;
+        >La commande GROUP BY est utilisée en SQL pour grouper plusieurs résultats et utiliser une fonction de totaux sur un groupe de résultat. Sur une table qui contient toutes les ventes d’un magasin, il est par exemple possible de liste regrouper les ventes par clients identiques et d’obtenir le coût total des achats pour chaque client.
+    ->Calculer la moyenne par élève, toutes matieres confondues. Afficher le nom de l'élève ainsi que le nom de sa classe et sa moyenne. Inclure les élèves n'ayant pas de classe. Trier les résultats par ordre alphabétique.
+
+        SELECT ele_nom AS "Nom",
+        cla_nom AS "Nom de classe",
+        AVG(not_note) AS "Moyenne"
+        FROM eleve
+        LEFT JOIN note ON eleve.ele_id = note.ele_id
+        LEFT JOIN classe ON eleve.cla_id = classe.cla_id
+        GROUP BY eleve.ele_id
+        ORDER BY "Nom" ASC;
+        =>Dans le langage SQL, la commande LEFT JOIN (aussi appelée LEFT OUTER JOIN) est un type de jointure entre 2 tables. Cela permet de lister tous les résultats de la table de gauche (left = gauche) même s’il n’y a pas de correspondance dans la deuxième tables.
+    ->Lister tous les élèves qui n'ont jamais été notés. Triez les par ID.
+
+        SELECT ele_id, 
+        ele_nom,
+        ele_prenom,
+        cla_id
+        FROM eleve
+        WHERE NOT EXISTS (
+        SELECT *
+        FROM note
+        WHERE eleve.ele_id = note.ele_id
+        );
+    ->Calculer la moyenne (tous élèves confondus) en chaque matière. Afficher le nom de la matière et la note, y compris s'il n'y a aucune note. Trier de la moyenne la plus faible à la plus élevée.
+
+        SELECT mat_nom AS "Matière",
+        AVG(not_note) AS "Moyenne"
+        FROM matiere
+        LEFT JOIN note ON matiere.mat_id = note.mat_id
+        GROUP BY mat_nom
+        ORDER BY "Moyenne" ASC;
+        ->Lister les noms et les moyennes générales des élèves ayant au moins 12 de moyenne. Trier les résultats de la plus basse à la plus élevée.
+
+        SELECT ele_nom AS "Nom",
+        AVG(not_note) AS "Moyenne"
+        FROM eleve
+        JOIN note ON eleve.ele_id = note.ele_id
+        GROUP BY ele_nom
+        HAVING AVG(not_note) >= 12
+        ORDER BY "Moyenne" ASC;
+    ->Lister les catégories de matiere (littéraire et scientifique) ansi que la moyenne des notes tous élèves confondus de chaque catégorie. Afficher d'abord la moyenne littéraire puis la moyenne scientifique.
+
+        SELECT mat_categorie AS "Catégorie",
+        AVG(not_note) AS "Moyenne"
+        FROM matiere
+        JOIN note ON matiere.mat_id = note.mat_id
+        GROUP BY "Catégorie"
+        ORDER BY "Catégorie" ASC;
+    ->Afficher les nombre de 100 à 10 compris, par ordre décroissant
+
+        WITH CompteurCTE
+        AS (
+            SELECT 100 AS i
+            UNION ALL
+            SELECT i - 1
+            FROM CompteurCTE
+            WHERE i > 10
+            )
+        SELECT *
+        FROM CompteurCTE;
+        =>Une CTE (expression de table commune) est une sous-requête nommée définie dans une clause WITH. Vous pouvez considérer la CTE comme une vue temporaire à utiliser dans l’instruction qui définit la CTE. La CTE définit le nom de la vue temporaire, une liste facultative de noms de colonnes et une expression de requête (c’est-à-dire une instruction SELECT). Le résultat de l’expression de requête est effectivement une table. Chaque colonne de cette table correspond à une colonne de la liste (facultative) de noms de colonnes.
+    ->Lister les noms et les moyennes générales des élèves ayant au moins la moyenne générale toutes matières classes confondues.
+
+        SELECT ele_nom AS "Nom",
+            AVG(not_note) AS "Moyenne"
+            FROM eleve
+            JOIN note ON eleve.ele_id = note.ele_id
+            GROUP BY ele_nom
+            HAVING AVG(not_note) >= (
+                SELECT AVG(Not_note)
+                FROM note
+            );
+    ->Calculer la moyenne pondérée par matière de chaque classe. Afficher le nom des classe ainsi que leur moyenne en triant de la plus élevée à la plus basse.
+
+        
