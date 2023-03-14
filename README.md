@@ -162,6 +162,21 @@ Google Slide:
 
 Google slide 1:
 
+![diapo1](Slide%20Merise%201/Présentation%20générale.png)
+![diapo2](Slide%20Merise%201/Présentation%20générale%20(1).png)
+![diapo3](Slide%20Merise%201/Présentation%20générale%20(2).png)
+![diapo4](Slide%20Merise%201/Présentation%20générale%20(3).png)
+![diapo5](Slide%20Merise%201/Présentation%20générale%20(4).png)
+![diapo6](Slide%20Merise%201/Présentation%20générale%20(5).png)
+![diapo7](Slide%20Merise%201/Présentation%20générale%20(6).png)
+![diapo8](Slide%20Merise%201/Présentation%20générale%20(7).png)
+![diapo9](Slide%20Merise%201/Présentation%20générale%20(8).png)
+![diapo10](Slide%20Merise%201/Présentation%20générale%20(9).png)
+![diapo11](Slide%20Merise%201/Présentation%20générale%20(10).png)
+![diapo12](Slide%20Merise%201/Présentation%20générale%20(11).png)
+![diapo13](Slide%20Merise%201/Présentation%20générale%20(12).png)
+
+
 
 ## Exercices:
 
@@ -326,4 +341,14 @@ Google slide 1:
         WHERE prix = (SELECT MIN(prix) FROM jeux_video) 
         or prix = (SELECT MAX(prix) FROM jeux_video)
         ORDER BY prix;
-
+- CookBook:
+  ->Requête SQL sur la base de données:
+  ![Requête cookbook](cookbook/2023-03-08-16-54-docs.google.com.png)
+- CONCEPTION DE BASE DE DONNÉES:
+  ->Lecture du cours: https://cyril-gruau.developpez.com/merise/
+  ->Concevoir, papier/slide ou autre support,  les schémas MCD/MLD/MPD pour les tableaux donnés.
+  ->Bonus en groupe (4 maxi par groupe):
+    Imaginer une table commande regroupant les informations sur des commandes des clients (tables permettant de savoir le lien entre commande, produits et utilisateurs).
+- CookBook:
+  ->Requête SQL sur la création de la base de données:
+  ![Requête cookbook](cookbook/Capture%20d%E2%80%99%C3%A9cran%202023-03-14%20185552.png)
