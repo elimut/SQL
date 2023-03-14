@@ -158,6 +158,11 @@ Google Slide:
 ![diapo14](Slide%20CRUD/slide14.png)
 ![diapo15](Slide%20CRUD/slide15.png)
 
+## Meéthode Merise
+
+Google slide 1:
+
+
 ## Exercices:
 
 - https://www.programiz.com/sql/online-compiler/
